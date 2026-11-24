@@ -1,0 +1,559 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f6ed">
+  <meta name="description" content="Salud basada en valor: recorrido académico por la cadena de valor de la atención integral de la hipertensión arterial y las medidas de resultados centradas en las personas.">
+  <title>Salud basada en valor | Hipertensión arterial</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #182a36;
+      --muted: #5b6c72;
+      --paper: #fbfcf8;
+      --white: #fff;
+      --green: #6a9e36;
+      --green-dark: #315b34;
+      --lime: #d8ed9f;
+      --pale: #edf4dd;
+      --blue: #337c8b;
+      --line: #dce5d3;
+      --coral: #d66a50;
+      --shadow: 0 18px 48px rgba(30, 55, 39, .09);
+      --radius: 22px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+    }
+    a { color: inherit; }
+    button { font: inherit; }
+    .wrap { width: min(1160px, calc(100% - 40px)); margin-inline: auto; }
+    .skip-link { position: absolute; left: -999px; top: 8px; z-index: 5; padding: 10px 14px; background: #fff; }
+    .skip-link:focus { left: 8px; }
+    .topbar { border-bottom: 1px solid rgba(49, 91, 52, .12); background: rgba(251,252,248,.88); }
+    .topbar-inner { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .brand-mark { display: grid; place-items: center; width: 42px; height: 42px; color: var(--green-dark); background: var(--lime); border-radius: 14px 14px 14px 5px; }
+    .brand-mark svg { width: 25px; height: 25px; }
+    .brand strong { display: block; font-size: .94rem; line-height: 1.2; letter-spacing: .01em; }
+    .brand small { display: block; color: var(--muted); font-size: .72rem; letter-spacing: .09em; text-transform: uppercase; }
+    .nav { display: flex; align-items: center; gap: 24px; }
+    .nav a { color: #42565d; font-size: .88rem; text-decoration: none; }
+    .nav a:hover { color: var(--green-dark); }
+    .nav .nav-cta { padding: 9px 14px; border: 1px solid #bfd19f; border-radius: 999px; color: var(--green-dark); font-weight: 700; }
+
+    .hero { position: relative; overflow: hidden; padding: 70px 0 56px; background: linear-gradient(115deg, #f1f5e5 0%, #f8f8ee 58%, #e7f0d8 100%); }
+    .hero::before, .hero::after { position: absolute; content: ""; pointer-events: none; border: 1px solid rgba(106,158,54,.17); border-radius: 50%; }
+    .hero::before { width: 530px; height: 530px; right: -155px; top: -300px; box-shadow: 0 0 0 28px rgba(106,158,54,.035), 0 0 0 56px rgba(106,158,54,.025); }
+    .hero::after { width: 340px; height: 340px; right: 9%; bottom: -270px; box-shadow: 0 0 0 24px rgba(106,158,54,.04); }
+    .hero-grid { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(320px, .9fr); align-items: center; gap: 54px; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 8px; color: var(--green-dark); font-size: .76rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+    .eyebrow::before { width: 24px; height: 2px; content: ""; background: var(--green); }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 { max-width: 690px; margin: 14px 0 18px; font-family: Georgia, "Times New Roman", serif; font-size: clamp(2.7rem, 5vw, 4.8rem); font-weight: 500; letter-spacing: -.045em; line-height: 1.04; }
+    h1 em { color: var(--green-dark); font-weight: 500; }
+    .hero-copy { max-width: 620px; margin-bottom: 27px; color: #53666a; font-size: 1.08rem; }
+    .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+    .button { display: inline-flex; align-items: center; justify-content: center; gap: 9px; min-height: 46px; padding: 11px 18px; border: 1px solid transparent; border-radius: 999px; font-size: .9rem; font-weight: 750; text-decoration: none; transition: transform .18s ease, box-shadow .18s ease; }
+    .button:hover { transform: translateY(-2px); }
+    .button-primary { color: #fff; background: var(--green-dark); box-shadow: 0 8px 18px rgba(49,91,52,.18); }
+    .button-secondary { border-color: #c7d5b7; color: var(--green-dark); background: rgba(255,255,255,.62); }
+    .button svg { width: 17px; height: 17px; }
+    .team-block { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; margin-top: 19px; padding: 12px 15px; border: 1px solid #d5e1c8; border-radius: 15px; background: rgba(255,255,255,.7); }
+    .team-label { color: var(--green-dark); font-size: .77rem; font-weight: 850; letter-spacing: .06em; text-transform: uppercase; }
+    .team-names { display: flex; flex-wrap: wrap; gap: 8px; }
+    .team-name { display: inline-block; padding: 6px 10px; border-radius: 999px; color: #203b2a; background: #e6f0d7; font-size: .96rem; font-weight: 780; line-height: 1.25; }
+    .reference-note { margin: 9px 0 0; color: #687a76; font-size: .73rem; line-height: 1.45; }
+    .hero-photo { position: relative; overflow: hidden; min-height: 330px; aspect-ratio: 1.22; margin: 0; border: 7px solid rgba(255,255,255,.75); border-radius: 28px; background: #dce8d1; box-shadow: 0 22px 55px rgba(30,55,39,.17); }
+    .hero-photo img { display: block; width: 100%; height: 100%; min-height: 330px; object-fit: cover; object-position: 52% 42%; }
+    .hero-photo::after { position: absolute; content: ""; inset: 35% 0 0; background: linear-gradient(180deg, transparent, rgba(18,41,34,.58)); pointer-events: none; }
+    .hero-photo figcaption { position: absolute; z-index: 1; right: 18px; bottom: 17px; left: 18px; display: flex; align-items: end; justify-content: space-between; gap: 12px; color: #fff; }
+    .hero-photo figcaption strong { display: block; font-size: .95rem; }
+    .hero-photo figcaption span { display: block; color: #e6eee5; font-size: .72rem; }
+    .photo-badge { align-self: start; padding: 7px 10px; border: 1px solid rgba(255,255,255,.48); border-radius: 999px; background: rgba(24,42,54,.37); backdrop-filter: blur(8px); color: #fff; font-size: .68rem; font-weight: 750; white-space: nowrap; }
+    .art-orbit { position: absolute; width: 300px; height: 300px; border: 1px solid rgba(49,91,52,.2); border-radius: 50%; }
+    .art-orbit::before, .art-orbit::after { position: absolute; content: ""; border: 1px dashed rgba(49,91,52,.22); border-radius: 50%; inset: 22px; }
+    .art-orbit::after { inset: 55px; border-style: solid; }
+    .heart-card { position: relative; z-index: 1; width: 208px; padding: 23px 18px 20px; border: 1px solid rgba(255,255,255,.85); border-radius: 26px; background: rgba(255,255,255,.8); box-shadow: var(--shadow); text-align: center; transform: rotate(-3deg); }
+    .heart-icon { display: grid; place-items: center; width: 94px; height: 94px; margin: 0 auto 13px; border-radius: 50%; color: var(--green-dark); background: var(--lime); }
+    .heart-icon svg { width: 56px; height: 56px; }
+    .heart-card strong { display: block; font-family: Georgia, serif; font-size: 1.26rem; }
+    .heart-card span { color: var(--muted); font-size: .78rem; }
+    .orbit-tag { position: absolute; z-index: 2; display: flex; align-items: center; gap: 8px; padding: 9px 12px; border: 1px solid #e1e8d8; border-radius: 12px; background: #fff; box-shadow: 0 8px 22px rgba(30,55,39,.08); color: #4c5d5c; font-size: .76rem; font-weight: 700; }
+    .orbit-tag b { color: var(--green-dark); }
+    .orbit-tag.one { top: 20px; right: 5px; }
+    .orbit-tag.two { bottom: 34px; right: 2px; }
+    .orbit-tag.three { bottom: 16px; left: 3px; }
+    .orbit-tag.four { top: 40px; left: 0; }
+    .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--green); }
+    .dot.blue { background: var(--blue); }
+    .dot.orange { background: var(--coral); }
+
+    .section { padding: 78px 0; }
+    .section-heading { max-width: 730px; margin-bottom: 34px; }
+    .section-heading h2 { margin: 10px 0 12px; font-family: Georgia, serif; font-size: clamp(2rem, 3.5vw, 3.15rem); font-weight: 500; letter-spacing: -.035em; line-height: 1.12; }
+    .section-heading p { margin-bottom: 0; color: var(--muted); font-size: 1rem; }
+    .section-kicker { color: var(--green-dark); font-size: .74rem; font-weight: 850; letter-spacing: .12em; text-transform: uppercase; }
+
+    .context { display: grid; grid-template-columns: 1.05fr .95fr; align-items: stretch; gap: 22px; }
+    .context-card { padding: 25px; border: 1px solid var(--line); border-radius: var(--radius); background: #fff; box-shadow: 0 8px 30px rgba(30,55,39,.045); }
+    .context-card h3 { margin-bottom: 13px; font-size: 1.08rem; }
+    .context-card p { margin-bottom: 0; color: var(--muted); font-size: .92rem; }
+    .stat-card { position: relative; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; min-height: 215px; padding: 26px; border-radius: var(--radius); color: #fff; background: var(--green-dark); }
+    .stat-card::after { position: absolute; width: 220px; height: 220px; content: ""; right: -52px; bottom: -125px; border: 1px solid rgba(255,255,255,.22); border-radius: 50%; box-shadow: 0 0 0 20px rgba(255,255,255,.045), 0 0 0 44px rgba(255,255,255,.035); }
+    .stat-label { color: #d9e8c7; font-size: .75rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+    .stat-numbers { display: flex; align-items: baseline; gap: 22px; }
+    .stat-numbers strong { font-family: Georgia, serif; font-size: 3.2rem; font-weight: 500; line-height: 1; }
+    .stat-numbers span { color: #d7e5c8; font-size: .82rem; }
+    .stat-desc { max-width: 400px; margin: 15px 0 0; color: #e4eddd; font-size: .83rem; }
+    .stat-source { position: relative; z-index: 1; margin: 15px 0 0; color: #c8dbc1; font-size: .7rem; }
+    .photo-section { padding: 8px 0 72px; }
+    .photo-intro { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 20px; }
+    .photo-intro h2 { max-width: 600px; margin: 8px 0 0; font-family: Georgia, serif; font-size: clamp(1.7rem, 3vw, 2.35rem); font-weight: 500; letter-spacing: -.03em; line-height: 1.15; }
+    .photo-intro p { max-width: 400px; margin: 0; color: var(--muted); font-size: .85rem; }
+    .photo-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 16px; }
+    .photo-card { position: relative; overflow: hidden; min-height: 270px; margin: 0; border-radius: 20px; background: #dce8d1; box-shadow: 0 12px 30px rgba(30,55,39,.08); }
+    .photo-card img { display: block; width: 100%; height: 100%; min-height: 270px; object-fit: cover; transition: transform .45s ease; }
+    .photo-card:hover img { transform: scale(1.035); }
+    .photo-card::after { position: absolute; content: ""; inset: 25% 0 0; background: linear-gradient(180deg, transparent, rgba(18,41,34,.74)); pointer-events: none; }
+    .photo-card figcaption { position: absolute; z-index: 1; right: 22px; bottom: 18px; left: 22px; color: #fff; }
+    .photo-card figcaption strong { display: block; font-family: Georgia, serif; font-size: 1.45rem; font-weight: 500; }
+    .photo-card figcaption span { display: block; max-width: 520px; color: #e2ebe3; font-size: .8rem; }
+
+    .chain-section { background: #f1f5e9; }
+    .chain-head { display: flex; align-items: end; justify-content: space-between; gap: 20px; margin-bottom: 26px; }
+    .chain-head .section-heading { margin-bottom: 0; }
+    .hint { max-width: 190px; color: #718070; font-size: .78rem; }
+    .stage-grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 12px; }
+    .stage-button { position: relative; min-height: 150px; padding: 16px 13px 15px; border: 1px solid #d8e2cc; border-radius: 17px; color: var(--ink); background: #fff; text-align: left; cursor: pointer; transition: .18s ease; }
+    .stage-button:not(:last-child)::after { position: absolute; z-index: 1; content: ""; width: 12px; height: 12px; top: 28px; right: -13px; border-top: 2px solid #9fb788; border-right: 2px solid #9fb788; transform: rotate(45deg); }
+    .stage-button:hover { border-color: #9ebb73; transform: translateY(-3px); box-shadow: 0 12px 25px rgba(30,55,39,.08); }
+    .stage-button[aria-pressed="true"] { border-color: var(--green-dark); color: #fff; background: var(--green-dark); box-shadow: 0 12px 28px rgba(49,91,52,.18); }
+    .stage-num { display: block; margin-bottom: 13px; color: var(--green); font-size: .72rem; font-weight: 900; letter-spacing: .09em; }
+    .stage-button[aria-pressed="true"] .stage-num { color: var(--lime); }
+    .stage-title { display: block; font-size: .93rem; font-weight: 780; line-height: 1.25; }
+    .stage-short { display: block; margin-top: 8px; color: #718077; font-size: .71rem; line-height: 1.35; }
+    .stage-button[aria-pressed="true"] .stage-short { color: #dce8d6; }
+    .detail-panel { display: grid; grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr); gap: 32px; margin-top: 18px; padding: clamp(22px, 4vw, 35px); border: 1px solid #d4dfc9; border-radius: var(--radius); background: #fff; box-shadow: 0 12px 35px rgba(30,55,39,.06); }
+    .detail-aside { padding-right: 15px; border-right: 1px solid #e5eadf; }
+    .detail-index { color: var(--green); font-size: .76rem; font-weight: 850; letter-spacing: .1em; text-transform: uppercase; }
+    .detail-aside h3 { margin: 7px 0 12px; font-family: Georgia, serif; font-size: 1.8rem; font-weight: 500; line-height: 1.15; }
+    .detail-aside p { color: var(--muted); font-size: .91rem; }
+    .detail-note { display: inline-flex; align-items: center; gap: 8px; padding: 7px 10px; border-radius: 9px; color: #496742; background: #f0f5e8; font-size: .75rem; font-weight: 700; }
+    .detail-note svg { width: 15px; height: 15px; flex: none; }
+    .detail-list { display: grid; grid-template-columns: 1fr 1fr; gap: 17px 22px; }
+    .detail-item { display: grid; grid-template-columns: 29px 1fr; align-content: start; gap: 9px; }
+    .detail-icon { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 9px; color: var(--green-dark); background: var(--pale); }
+    .detail-icon svg { width: 16px; height: 16px; }
+    .detail-item h4 { margin: 2px 0 5px; font-size: .82rem; }
+    .detail-item p { margin: 0; color: #62716f; font-size: .78rem; line-height: 1.5; }
+    .owner-tag { display: inline-block; margin-top: 7px; padding: 3px 7px; border-radius: 999px; color: #4a6b35; background: #edf4df; font-size: .62rem; font-weight: 800; letter-spacing: .015em; }
+    .owner-legend { margin: 0 0 16px; color: #687772; font-size: .74rem; }
+
+    .support { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .support-card { padding: 20px; border: 1px solid var(--line); border-radius: 18px; background: #fff; }
+    .support-card .detail-icon { width: 36px; height: 36px; margin-bottom: 14px; }
+    .support-card .detail-icon svg { width: 19px; height: 19px; }
+    .support-card h3 { margin-bottom: 7px; font-size: .98rem; }
+    .support-card p { margin-bottom: 0; color: var(--muted); font-size: .82rem; }
+
+    .ichom-section { color: #f5f7ee; background: #1c373b; }
+    .ichom-section .section-kicker { color: #b5d879; }
+    .ichom-section .section-heading p { color: #c2d0c8; }
+    .ichom-layout { display: grid; grid-template-columns: .75fr 1.25fr; gap: 42px; align-items: start; }
+    .ichom-intro { position: sticky; top: 25px; }
+    .ichom-intro h2 { margin: 9px 0 14px; font-family: Georgia, serif; font-size: clamp(2rem, 3.6vw, 3.2rem); font-weight: 500; letter-spacing: -.035em; line-height: 1.13; }
+    .ichom-intro p { color: #c2d0c8; font-size: .94rem; }
+    .result-list { display: grid; gap: 10px; }
+    .result-row { display: grid; grid-template-columns: 43px 1fr auto; align-items: center; gap: 14px; padding: 17px; border: 1px solid rgba(255,255,255,.13); border-radius: 15px; background: rgba(255,255,255,.055); }
+    .result-index { display: grid; place-items: center; width: 39px; height: 39px; border-radius: 13px; color: #d8ed9f; background: rgba(216,237,159,.12); font-family: Georgia, serif; font-size: 1.1rem; }
+    .result-row h3 { margin: 0 0 3px; font-size: .9rem; }
+    .result-row p { margin: 0; color: #c1d0c9; font-size: .77rem; }
+    .result-time { justify-self: end; padding: 6px 9px; border: 1px solid rgba(216,237,159,.24); border-radius: 999px; color: #d8ed9f; font-size: .68rem; text-align: center; }
+    .timeline { display: flex; align-items: center; justify-content: space-between; gap: 4px; margin: 26px 0 12px; }
+    .timepoint { display: grid; justify-items: center; gap: 7px; min-width: 48px; color: #d8ed9f; font-size: .68rem; text-align: center; }
+    .timepoint::before { width: 11px; height: 11px; content: ""; border: 3px solid #d8ed9f; border-radius: 50%; background: #1c373b; box-shadow: 0 0 0 4px rgba(216,237,159,.12); }
+    .time-line { flex: 1; height: 1px; background: rgba(216,237,159,.4); }
+    .timeline-caption { color: #b7c8c0; font-size: .72rem; text-align: center; }
+    .ichom-footnote { margin-top: 23px; padding: 13px 15px; border-left: 3px solid #b5d879; color: #d4dfd9; background: rgba(255,255,255,.06); font-size: .78rem; }
+
+    .scope-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .scope-card { padding: 24px; border: 1px solid var(--line); border-radius: var(--radius); background: #fff; }
+    .scope-card h3 { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; font-size: 1rem; }
+    .scope-card h3 .detail-icon { flex: none; }
+    .scope-card ul { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
+    .scope-card li { position: relative; padding-left: 20px; color: var(--muted); font-size: .86rem; }
+    .scope-card li::before { position: absolute; content: ""; width: 7px; height: 7px; top: .58em; left: 2px; border-radius: 50%; background: var(--green); }
+    .scope-callout { margin-top: 16px; padding: 16px 18px; border-radius: 13px; color: #4b6445; background: #edf4df; font-size: .82rem; }
+
+    .closing { padding: 62px 0; background: linear-gradient(115deg,#e8f1d8,#f4f6ed 60%,#ebf2e3); }
+    .closing-box { display: flex; align-items: center; justify-content: space-between; gap: 32px; padding: 32px; border: 1px solid #d5e1c8; border-radius: 24px; background: rgba(255,255,255,.77); }
+    .closing-box h2 { max-width: 610px; margin: 7px 0; font-family: Georgia, serif; font-size: clamp(1.6rem, 3vw, 2.5rem); font-weight: 500; line-height: 1.15; }
+    .closing-box p { max-width: 600px; margin: 0; color: var(--muted); font-size: .9rem; }
+    .sources { padding: 54px 0 34px; }
+    .sources h2 { margin-bottom: 14px; font-family: Georgia, serif; font-size: 1.45rem; font-weight: 500; }
+    .sources ol { display: grid; gap: 10px; margin: 0; padding-left: 19px; color: #62716f; font-size: .78rem; }
+    .sources a { color: var(--green-dark); }
+    .source-note { margin: 18px 0 0; padding: 13px 15px; border: 1px solid #e4eadf; border-radius: 12px; color: #697774; font-size: .75rem; }
+    footer { padding: 18px 0 28px; border-top: 1px solid #e5eade; color: #74817a; font-size: .72rem; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 20px; }
+    :focus-visible { outline: 3px solid #db8858; outline-offset: 3px; }
+    @media (max-width: 900px) {
+      .nav { gap: 13px; }
+      .nav a { font-size: .8rem; }
+      .hero-grid { grid-template-columns: 1fr .8fr; gap: 18px; }
+      .stage-grid { grid-template-columns: repeat(3, minmax(0,1fr)); }
+      .stage-button { min-height: 125px; }
+      .stage-button:nth-child(3)::after { display: none; }
+      .support { grid-template-columns: repeat(2,1fr); }
+      .ichom-layout { grid-template-columns: 1fr; gap: 20px; }
+      .ichom-intro { position: static; }
+    }
+    @media (max-width: 640px) {
+      .wrap { width: min(100% - 28px, 1160px); }
+      .topbar-inner { min-height: 66px; }
+      .nav a:not(.nav-cta) { display: none; }
+      .nav .nav-cta { padding: 8px 11px; font-size: .76rem; }
+      .hero { padding: 49px 0 35px; }
+      .hero-grid { grid-template-columns: 1fr; }
+      .hero-photo { min-height: 280px; margin-top: 6px; aspect-ratio: 1.25; }
+      .hero-photo img { min-height: 280px; }
+      .art-orbit { width: 260px; height: 260px; }
+      .orbit-tag.one { right: 0; }
+      .orbit-tag.two { right: -2px; bottom: 18px; }
+      .orbit-tag.three { left: -2px; bottom: 8px; }
+      .orbit-tag.four { left: -2px; top: 30px; }
+      .section { padding: 57px 0; }
+      .context, .scope-grid { grid-template-columns: 1fr; }
+      .photo-intro { display: block; }
+      .photo-intro p { margin-top: 10px; }
+      .photo-grid { grid-template-columns: 1fr; gap: 11px; }
+      .photo-card { min-height: 230px; }
+      .photo-card img { min-height: 230px; }
+      .chain-head { display: block; }
+      .hint { max-width: none; margin: -14px 0 18px; }
+      .stage-grid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 9px; }
+      .stage-button { min-height: 117px; padding: 13px; }
+      .stage-button::after { display: none; }
+      .stage-title { font-size: .87rem; }
+      .detail-panel { grid-template-columns: 1fr; gap: 20px; padding: 21px; }
+      .detail-aside { padding: 0 0 16px; border-right: 0; border-bottom: 1px solid #e5eadf; }
+      .detail-list { gap: 14px 11px; }
+      .detail-item { grid-template-columns: 25px 1fr; gap: 7px; }
+      .detail-icon { width: 25px; height: 25px; }
+      .detail-item h4 { font-size: .77rem; }
+      .detail-item p { font-size: .72rem; }
+      .support { grid-template-columns: 1fr 1fr; gap: 9px; }
+      .support-card { padding: 15px; }
+      .support-card h3 { font-size: .87rem; }
+      .support-card p { font-size: .76rem; }
+      .result-row { grid-template-columns: 36px 1fr; gap: 11px; padding: 13px; }
+      .result-time { grid-column: 2; justify-self: start; }
+      .timeline { gap: 1px; }
+      .timepoint { min-width: 38px; font-size: .6rem; }
+      .closing-box { display: block; padding: 23px; }
+      .closing-box .button { margin-top: 18px; }
+      .footer-inner { display: block; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="#inicio" aria-label="Inicio: Cadena de valor en hipertensión">
+        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 20s-8-4.6-8-11a4.4 4.4 0 0 1 8-2.5A4.4 4.4 0 0 1 20 9c0 6.4-8 11-8 11Z" stroke="currentColor" stroke-width="1.8"/><path d="M5.5 12h3l1.5-3 2.1 6 1.7-3h4.7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span><strong>Salud basada en valor</strong><small>Trabajo académico · CM1</small></span>
+      </a>
+      <nav class="nav" aria-label="Navegación principal">
+        <a href="#cadena">La cadena</a>
+        <a href="#resultados">Resultados ICHOM</a>
+        <a href="#alcance">Alcance clínico</a>
+        <a class="nav-cta" href="#fuentes">Fuentes</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="contenido">
+    <section class="hero" id="inicio">
+      <div class="wrap hero-grid">
+        <div>
+          <span class="eyebrow">Tema del trabajo · hipertensión arterial</span>
+          <h1>Salud basada en <em>valor</em></h1>
+          <p class="hero-copy">Cadena de valor del proceso asistencial para hipertensión arterial: una ruta que conecta prevención, diagnóstico, tratamiento y seguimiento con resultados que importan a cada persona.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#cadena">Explorar las seis etapas <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10h12m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a class="button button-secondary" href="#resultados">Ver qué medir</a>
+          </div>
+          <div class="team-block" aria-label="Integrantes del trabajo">
+            <span class="team-label">Integrantes</span>
+            <div class="team-names"><span class="team-name">Yelitza Coronel</span><span class="team-name">Claudia Patricia Rojas Álvarez</span></div>
+          </div>
+          <p class="reference-note">La guía ICHOM de referencia presenta un grupo de trabajo dirigido por el profesor Peter Lamptey, de la London School of Hygiene and Tropical Medicine.</p>
+        </div>
+        <figure class="hero-photo">
+          <img src="assets/control-presion.jpg" alt="Profesional de salud realiza una valoración cardiovascular a una paciente durante una consulta." fetchpriority="high" width="1260" height="750">
+          <figcaption><div><strong>La atención empieza escuchando</strong><span>Medición clínica y diálogo con la persona</span></div><span class="photo-badge">Cuidado cardiovascular</span></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="por-que">
+      <div class="wrap">
+        <div class="section-heading">
+          <span class="section-kicker">El reto</span>
+          <h2 id="por-que">No basta con medir una cifra</h2>
+          <p>La hipertensión requiere continuidad: detectar a tiempo, confirmar el diagnóstico, acordar un plan y revisar tanto el control clínico como la experiencia de la persona.</p>
+        </div>
+        <div class="context">
+          <article class="context-card">
+            <h3>¿Qué significa crear valor en salud?</h3>
+            <p>La cadena de valor organiza las actividades que producen atención a lo largo del ciclo. El enfoque de resultados centrados en la persona complementa ese mapa: permite observar qué cambió en la salud, qué carga implicó el cuidado y si el proceso respondió a las prioridades del paciente.</p>
+          </article>
+          <aside class="stat-card" aria-label="Dato de contexto del artículo Zack y colaboradores, 2019">
+            <span class="stat-label">Contexto publicado en 2019 · control entre personas diagnosticadas</span>
+            <div class="stat-numbers"><strong>20%</strong><span>países de ingresos bajos<br>y medianos</span><strong>42%</strong><span>países de<br>ingresos altos</span></div>
+            <p class="stat-desc">El artículo reportó esta diferencia al revisar el control de la presión arterial entre personas diagnosticadas. Es un dato histórico del estudio, no una estimación actual.</p>
+            <p class="stat-source">Zack et al., 2019 · DOI: 10.1161/HYPERTENSIONAHA.118.11916</p>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="photo-section" aria-labelledby="personas-titulo">
+      <div class="wrap">
+        <div class="photo-intro"><div><span class="section-kicker">Cuidado centrado en la persona</span><h2 id="personas-titulo">La ruta continúa dentro y fuera de la consulta</h2></div><p>La conversación clínica y las acciones cotidianas forman parte del proceso de cuidado; ambas se conectan con metas acordadas y seguimiento.</p></div>
+        <div class="photo-grid">
+          <figure class="photo-card"><img src="assets/consulta-compartida.jpg" alt="Profesional de salud y paciente conversan durante una consulta." loading="lazy" width="1260" height="750"><figcaption><strong>Decisiones compartidas</strong><span>Comprender el plan, expresar preferencias y resolver dudas ayuda a sostener el cuidado.</span></figcaption></figure>
+          <figure class="photo-card"><img src="assets/actividad-cotidiana.jpg" alt="Mujer adulta mayor camina con bastones por un sendero verde." loading="lazy" width="1260" height="750"><figcaption><strong>Hábitos y continuidad</strong><span>El acompañamiento se adapta a la vida diaria y a las posibilidades de cada persona.</span></figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section chain-section" id="cadena" aria-labelledby="cadena-titulo">
+      <div class="wrap">
+        <div class="chain-head">
+          <div class="section-heading">
+            <span class="section-kicker">El recorrido asistencial</span>
+            <h2 id="cadena-titulo">Seis etapas, un ciclo conectado</h2>
+            <p>Selecciona una etapa para ver su actividad principal y cómo se integra el apoyo transversal.</p>
+          </div>
+          <p class="hint">La atención no termina al iniciar el tratamiento: el seguimiento vuelve a activar decisiones cuando hacen falta.</p>
+        </div>
+        <div class="stage-grid" role="group" aria-label="Etapas de la cadena de valor">
+          <button class="stage-button" type="button" data-stage="0" aria-pressed="true"><span class="stage-num">ETAPA 01</span><span class="stage-title">Monitoreo y prevención</span><span class="stage-short">Detectar riesgos e iniciar la ruta</span></button>
+          <button class="stage-button" type="button" data-stage="1" aria-pressed="false"><span class="stage-num">ETAPA 02</span><span class="stage-title">Diagnóstico</span><span class="stage-short">Confirmar y caracterizar</span></button>
+          <button class="stage-button" type="button" data-stage="2" aria-pressed="false"><span class="stage-num">ETAPA 03</span><span class="stage-title">Preparación</span><span class="stage-short">Acordar metas y plan</span></button>
+          <button class="stage-button" type="button" data-stage="3" aria-pressed="false"><span class="stage-num">ETAPA 04</span><span class="stage-title">Intervención</span><span class="stage-short">Implementar y ajustar</span></button>
+          <button class="stage-button" type="button" data-stage="4" aria-pressed="false"><span class="stage-num">ETAPA 05</span><span class="stage-title">Recuperación y rehabilitación</span><span class="stage-short">Estabilizar y recuperar</span></button>
+          <button class="stage-button" type="button" data-stage="5" aria-pressed="false"><span class="stage-num">ETAPA 06</span><span class="stage-title">Monitoreo y gestión</span><span class="stage-short">Sostener y retroalimentar</span></button>
+        </div>
+        <section class="detail-panel" aria-live="polite" aria-atomic="true" aria-label="Detalle de etapa seleccionada">
+          <div class="detail-aside">
+            <span class="detail-index" id="detail-index">Etapa 01</span>
+            <h3 id="detail-title">Monitoreo y prevención</h3>
+            <p id="detail-summary"></p>
+            <span class="detail-note"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 2.5v15m7.5-7.5h-15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span id="detail-focus"></span></span>
+          </div>
+          <div><p class="owner-legend">La insignia identifica las actividades marcadas como ejecución directa de CEXCA en el taller.</p><div class="detail-list" id="detail-list"></div></div>
+        </section>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="apoyos-titulo">
+      <div class="wrap">
+        <div class="section-heading">
+          <span class="section-kicker">Capacidades transversales</span>
+          <h2 id="apoyos-titulo">Lo que sostiene cada etapa</h2>
+          <p>Estas actividades atraviesan el ciclo completo y ayudan a que la atención sea comprensible, medible y accesible.</p>
+        </div>
+        <div class="support">
+          <article class="support-card"><span class="detail-icon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 19V8l8-4 8 4v11M8 19v-6h8v6M2 20h20" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span><h3>Conocimiento del equipo</h3><p>Protocolos compartidos para la medición de PA, confirmación diagnóstica, selección terapéutica y lectura de cohortes.</p></article>
+          <article class="support-card"><span class="detail-icon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 5h16v11H9l-5 4V5Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M8 9h8m-8 3h5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span><h3>Información a la persona</h3><p>Explicar el diagnóstico, las metas acordadas, el uso del tratamiento y cuándo solicitar ayuda según el plan clínico.</p></article>
+          <article class="support-card"><span class="detail-icon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 19V5m0 14h16M7 15l4-4 3 2 5-6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span><h3>Medición útil</h3><p>Registrar PA y factores clínicos con regularidad; revisar datos de cohorte para detectar brechas y orientar mejoras.</p></article>
+          <article class="support-card"><span class="detail-icon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 21s7-4.3 7-10V5l-7-3-7 3v6c0 5.7 7 10 7 10Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="m9 11 2 2 4-4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span><h3>Acceso y continuidad</h3><p>Facilitar consultas, pruebas, medicamentos y transición entre niveles, procurando que las barreras sean visibles.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section ichom-section" id="resultados" aria-labelledby="resultados-titulo">
+      <div class="wrap ichom-layout">
+        <div class="ichom-intro">
+          <span class="section-kicker">Medir resultados que importan</span>
+          <h2 id="resultados-titulo">¿Cómo sabemos si la ruta está funcionando?</h2>
+          <p>ICHOM propone observar resultados clínicos junto con la carga del cuidado y la salud reportada por la persona. El diccionario define variables, fuentes y momentos de recolección para hacer comparables los datos.</p>
+          <div class="timeline" aria-label="Momentos de medición representativos: línea base, seis meses, doce meses y cuatro a seis semanas tras un cambio de tratamiento">
+            <span class="timepoint">Inicio</span><i class="time-line"></i><span class="timepoint">6 meses</span><i class="time-line"></i><span class="timepoint">12 meses</span><i class="time-line"></i><span class="timepoint">4–6 sem.</span>
+          </div>
+          <p class="timeline-caption">Esquema resumido: el momento depende de la variable y del evento clínico.</p>
+          <div class="ichom-footnote">La guía describe una medición mínima anual de presión arterial y una revisión a las 4–6 semanas tras iniciar o cambiar el tratamiento para ciertos resultados clínicos.</div>
+        </div>
+        <div class="result-list">
+          <article class="result-row"><span class="result-index">01</span><div><h3>Control de la presión arterial</h3><p>Presión sistólica y diastólica registradas por el equipo clínico.</p></div><span class="result-time">Mínimo anual</span></article>
+          <article class="result-row"><span class="result-index">02</span><div><h3>Supervivencia y eventos cardiovasculares</h3><p>Estado vital y eventos como enfermedad isquémica, cerebrovascular o urgencia/emergencia hipertensiva.</p></div><span class="result-time">Seguimiento anual</span></article>
+          <article class="result-row"><span class="result-index">03</span><div><h3>Efectos secundarios y eventos adversos</h3><p>Identificar efectos del tratamiento y revisar su evolución tras cambios relevantes.</p></div><span class="result-time">Anual · 4–6 semanas*</span></article>
+          <article class="result-row"><span class="result-index">04</span><div><h3>Acceso y carga del tratamiento</h3><p>Explorar barreras para recibir atención o medicamentos y número de tabletas al día.</p></div><span class="result-time">6 meses · anual</span></article>
+          <article class="result-row"><span class="result-index">05</span><div><h3>Salud reportada por la persona</h3><p>Calidad de vida, satisfacción, creencias sobre medicamentos y adherencia, mediante instrumentos definidos.</p></div><span class="result-time">Línea base · seguimiento</span></article>
+        </div>
+      </div>
+      <div class="wrap"><p class="timeline-caption" style="margin-top:18px;text-align:left">* La guía establece momentos distintos según el resultado y el cambio terapéutico; revisar el diccionario antes de implementar cada medición.</p></div>
+    </section>
+
+    <section class="section" id="alcance" aria-labelledby="alcance-titulo">
+      <div class="wrap">
+        <div class="section-heading">
+          <span class="section-kicker">Límites del ejercicio</span>
+          <h2 id="alcance-titulo">¿A quién incluye esta cadena?</h2>
+          <p>El alcance delimita qué recorrido se analiza y cuándo se requiere articular la atención con otro servicio.</p>
+        </div>
+        <div class="scope-grid">
+          <article class="scope-card">
+            <h3><span class="detail-icon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 21s8-4 8-11V5l-8-3-8 3v5c0 7 8 11 8 11Z" stroke="currentColor" stroke-width="1.7"/><path d="M8 12h8m-4-4v8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span>Incluye</h3>
+            <ul>
+              <li>Personas adultas con diagnóstico confirmado de hipertensión esencial primaria, no complicada o en manejo ambulatorio integral.</li>
+              <li>Seguimiento continuo del control tensional y de factores relacionados con el cuidado.</li>
+              <li>Comorbilidades relacionadas y controladas, según los límites descritos en el instrumento CVPA.</li>
+              <li>Alternativas farmacológicas y no farmacológicas dentro del plan clínico acordado.</li>
+            </ul>
+          </article>
+          <article class="scope-card">
+            <h3><span class="detail-icon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.7"/><path d="M8.5 8.5 15.5 15.5m0-7-7 7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span>Se excluye o se remite</h3>
+            <ul>
+              <li>Hipertensión gestacional o preeclampsia.</li>
+              <li>Hipertensión secundaria compleja de causa endocrina o renovascular.</li>
+              <li>Enfermedad renal crónica avanzada (estadios 4–5 o diálisis).</li>
+              <li>Emergencia hipertensiva o evento agudo: requiere atención inmediata y una ruta especializada.</li>
+            </ul>
+          </article>
+        </div>
+        <div class="scope-callout"><strong>Nota de alcance:</strong> el taller define el ingreso como confirmación diagnóstica e ingreso al programa, y el punto final como revisión anual dentro de un ciclo crónico que continúa. Los umbrales que aparecen en el instrumento son parte del ejercicio académico, no una recomendación clínica universal.</div>
+      </div>
+    </section>
+
+    <section class="closing">
+      <div class="wrap closing-box">
+        <div><span class="section-kicker">Idea para llevar</span><h2>La cadena crea valor cuando no pierde de vista a la persona.</h2><p>Procesos coordinados, acceso oportuno y resultados compartidos ayudan a orientar la mejora continua de la atención.</p></div>
+        <a class="button button-primary" href="#cadena">Volver a la cadena <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10h12m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+    </section>
+
+    <section class="sources" id="fuentes" aria-labelledby="fuentes-titulo">
+      <div class="wrap">
+        <h2 id="fuentes-titulo">Fuentes consultadas</h2>
+        <ol>
+          <li>Instrumento académico <em>Cadena de valor del proceso asistencial (CVPA) — CM1: Hipertensión arterial</em>. Metodología Porter y Teisberg (2008). Incluye el alcance de la condición y las observaciones por etapa.</li>
+          <li>International Consortium for Health Outcomes Measurement (ICHOM). <em>Hipertensión en países de ingresos bajos y medianos: guía de referencia para la recolección de datos</em>. Versión 5.0.1, revisión del 27 de enero de 2023.</li>
+          <li>Zack, R. et al. (2019). <em>Mejora de la medición de resultados en hipertensión en países de ingresos bajos y medianos</em>. <span>Hypertension, 73(5), 990–997. DOI: <a href="https://doi.org/10.1161/HYPERTENSIONAHA.118.11916" target="_blank" rel="noreferrer">10.1161/HYPERTENSIONAHA.118.11916</a>.</span></li>
+          <li><em>Diccionario de datos ICHOM para hipertensión</em>, versión en español suministrada para esta actividad. Define variables, dominios, fuentes y momentos de recolección.</li>
+          <li>Fotografías ilustrativas de Pexels: Antoni Shkraba (<a href="https://www.pexels.com/photo/a-doctor-checking-a-patient-s-blood-pressure-5215000/" target="_blank" rel="noreferrer">medición de presión</a>), Cedric Fauntleroy (<a href="https://www.pexels.com/photo/a-doctor-talking-to-a-patient-while-holding-a-tablet-4266936/" target="_blank" rel="noreferrer">consulta</a>) y Anastasia Shuraeva (<a href="https://www.pexels.com/photo/elderly-woman-walking-on-a-park-8795584/" target="_blank" rel="noreferrer">actividad cotidiana</a>). Imágenes usadas bajo la licencia gratuita de Pexels.</li>
+        </ol>
+        <p class="source-note">Material académico y educativo. Esta página resume los documentos de referencia; no es una guía de diagnóstico o tratamiento, ni sustituye la valoración de profesionales de salud. ICHOM es citado como fuente y esta página no representa una publicación oficial de ICHOM.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer><div class="wrap footer-inner"><span>Salud basada en valor · CVPA CM1 Hipertensión arterial</span><span>Integrantes: Yelitza Coronel y Claudia Patricia Rojas Álvarez</span></div></footer>
+
+  <script>
+    const stageData = [
+      {
+        title: 'Monitoreo y prevención',
+        summary: 'La puerta de entrada al ciclo: identificar riesgo cardiovascular y acercar la medición de la presión arterial a la población.',
+        focus: 'Detectar temprano y reducir barreras iniciales',
+        direct: ['knowledge', 'information', 'measurement', 'access', 'primary'],
+        knowledge: 'Capacitar al equipo en tamización, técnica estandarizada de toma de PA y prevención primaria.',
+        information: 'Conversar sobre factores modificables, autocuidado y por qué conviene conocer la presión arterial.',
+        measurement: 'Registrar PA, antropometría y factores de riesgo; organizar los hallazgos para activar la ruta.',
+        access: 'Ofrecer puntos de detección, consulta preventiva y canales de orientación accesibles.',
+        primary: 'Tamización poblacional u oportunista, identificación de riesgo e ingreso al programa cuando corresponda.'
+      },
+      {
+        title: 'Diagnóstico',
+        summary: 'Integra la evaluación clínica y las mediciones necesarias para confirmar la condición y comprender el perfil de riesgo.',
+        focus: 'Confirmar, caracterizar y acordar el siguiente paso',
+        direct: ['knowledge', 'information', 'measurement', 'primary'],
+        knowledge: 'Aplicar protocolos de confirmación, estratificación de riesgo y búsqueda de causas secundarias cuando esté indicado.',
+        information: 'Explicar el diagnóstico, su curso crónico y las razones de las pruebas y decisiones clínicas.',
+        measurement: 'Revisar mediciones seriadas o ambulatorias y los estudios basales definidos por el equipo tratante.',
+        access: 'Coordinar oportunamente pruebas, laboratorio y valoración especializada cuando aplique.',
+        primary: 'Anamnesis, examen cardiovascular, confirmación diagnóstica, estudios de extensión y plan inicial.'
+      },
+      {
+        title: 'Preparación',
+        summary: 'Antes o junto al inicio terapéutico, el equipo y la persona preparan metas, prioridades y apoyos para el plan de cuidado.',
+        focus: 'Alinear metas, preferencias y recursos disponibles',
+        direct: ['knowledge', 'information', 'access', 'primary'],
+        knowledge: 'Seleccionar opciones terapéuticas de acuerdo con comorbilidades, contexto clínico y guías vigentes.',
+        information: 'Acordar metas comprensibles y cambios posibles en hábitos, con decisiones compartidas.',
+        measurement: 'Establecer valores basales, revisar barreras de adherencia y documentar factores relevantes.',
+        access: 'Articular nutrición, apoyo psicosocial y actividad física cuando formen parte del plan.',
+        primary: 'Definición individualizada del plan y preparación del esquema farmacológico y no farmacológico.'
+      },
+      {
+        title: 'Intervención',
+        summary: 'Pone en marcha el plan acordado y permite responder a la evolución clínica, la tolerancia y las preferencias de la persona.',
+        focus: 'Implementar el plan y revisar respuesta y seguridad',
+        direct: ['knowledge', 'information', 'measurement', 'access', 'primary'],
+        knowledge: 'Mantener actualizado el abordaje farmacológico y los protocolos de atención de descompensaciones.',
+        information: 'Aclarar el uso del tratamiento, los posibles efectos y la importancia de informar cambios o dificultades.',
+        measurement: 'Seguir la respuesta tensional y los parámetros de seguridad indicados por el equipo clínico.',
+        access: 'Coordinar consultas y continuidad de los medicamentos formulados, reduciendo interrupciones evitables.',
+        primary: 'Inicio o ajuste del tratamiento y atención oportuna de episodios de descompensación.'
+      },
+      {
+        title: 'Recuperación y rehabilitación',
+        summary: 'Después de una descompensación o episodio agudo, conecta estabilización, recuperación funcional y retorno seguro al seguimiento.',
+        focus: 'Cuidar la transición y evitar quiebres de atención',
+        direct: ['knowledge', 'information', 'measurement'],
+        knowledge: 'Usar protocolos de transición posevento y de revisión del esquema terapéutico.',
+        information: 'Reforzar el plan de cuidado, la automedición si fue indicada y las señales para solicitar atención.',
+        measurement: 'Verificar evolución clínica y metas de estabilización en el periodo que defina el equipo tratante.',
+        access: 'Facilitar control temprano, rehabilitación o soporte domiciliario según las necesidades.',
+        primary: 'Estabilización, ajuste del plan, rehabilitación y preparación para retomar controles ambulatorios.'
+      },
+      {
+        title: 'Monitoreo y gestión',
+        summary: 'Sostiene el cuidado crónico y transforma los datos de seguimiento en decisiones clínicas y oportunidades de mejora del servicio.',
+        focus: 'Dar continuidad y retroalimentar la ruta',
+        direct: ['knowledge', 'information', 'measurement', 'access', 'primary'],
+        knowledge: 'Analizar cohortes, control de PA, eventos, progresión de daño y desempeño del ciclo asistencial.',
+        information: 'Acompañar hábitos y tratamiento a largo plazo, atendiendo preguntas y barreras que puedan cambiar.',
+        measurement: 'Programar controles, PA, variables clínicas y resultados reportados por la persona según el conjunto definido.',
+        access: 'Simplificar la renovación de fórmulas, controles y articulación entre niveles de atención.',
+        primary: 'Seguimiento longitudinal, vigilancia clínica y ajuste del plan; los hallazgos pueden reactivar otras etapas.'
+      }
+    ];
+    const icons = {
+      knowledge: '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 19V8l8-4 8 4v11M8 19v-6h8v6M2 20h20" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+      information: '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 5h16v11H9l-5 4V5Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M8 9h8m-8 3h5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>',
+      measurement: '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 19V5m0 14h16M7 15l4-4 3 2 5-6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+      access: '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 21s7-4.3 7-10V5l-7-3-7 3v6c0 5.7 7 10 7 10Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="m9 11 2 2 4-4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+      primary: '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+    };
+    const labels = { knowledge: 'Conocimiento', information: 'Información a la persona', measurement: 'Medición', access: 'Acceso', primary: 'Actividad primaria' };
+    const buttons = [...document.querySelectorAll('.stage-button')];
+    function showStage(index) {
+      const stage = stageData[index];
+      buttons.forEach((button, i) => button.setAttribute('aria-pressed', String(i === index)));
+      document.querySelector('#detail-index').textContent = `Etapa ${String(index + 1).padStart(2, '0')}`;
+      document.querySelector('#detail-title').textContent = stage.title;
+      document.querySelector('#detail-summary').textContent = stage.summary;
+      document.querySelector('#detail-focus').textContent = stage.focus;
+      document.querySelector('#detail-list').innerHTML = ['knowledge', 'information', 'measurement', 'access', 'primary'].map(key => `<article class="detail-item"><span class="detail-icon">${icons[key]}</span><div><h4>${labels[key]}</h4><p>${stage[key]}</p>${stage.direct.includes(key) ? '<span class="owner-tag">Ejecución directa CEXCA</span>' : ''}</div></article>`).join('');
+    }
+    buttons.forEach(button => button.addEventListener('click', () => showStage(Number(button.dataset.stage))));
+    showStage(0);
+  </script>
+</body>
+</html>
