@@ -3,7 +3,7 @@
 Página académica estática sobre la cadena de valor del proceso asistencial (CVPA, CM1) para hipertensión arterial. Resume las seis etapas del taller y relaciona las actividades de atención con resultados centrados en la persona del conjunto ICHOM.
 
 **Tema:** Salud basada en valor  
-**Integrantes:** Yelitza Coronel y Claudia Patricia Rojas Álvarez
+**Integrantes:** Yelitza Coronel, Claudia Patricia Rojas Álvarez y María Fernanda Bumbila
 
 ## Abrir la página
 
